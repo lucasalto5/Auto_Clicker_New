@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: transparent;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            user-select: none;
+        }
+        #points-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .point-marker {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 800;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            pointer-events: auto;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: marker-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes marker-pop {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+        .point-marker:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.9);
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+        .point-marker .remove-btn {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            width: 20px;
+            height: 20px;
+            background: #fa0a42;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10;
+        }
+        .point-marker:hover .remove-btn {
+            opacity: 1;
+            transform: scale(1);
+        }
+        /* Pulso suave e centralizado */
+        .point-marker::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: pulse-ring 2.5s infinite;
+            pointer-events: none;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(1); opacity: 0.3; }
+            100% { transform: scale(1.4); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div id="points-container"></div>
+    <script>
+        const { ipcRenderer } = require('electron');
+        const container = document.getElementById('points-container');
+
+        ipcRenderer.on('update-points', (event, points) => {
+            container.innerHTML = '';
+            points.forEach((p, i) => {
+                const marker = document.createElement('div');
+                marker.className = 'point-marker';
+                marker.style.left = p.x + 'px';
+                marker.style.top = p.y + 'px';
+                marker.innerText = i + 1;
+                
+                const removeBtn = document.createElement('div');
+                removeBtn.className = 'remove-btn';
+                removeBtn.innerHTML = '✕';
+                removeBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    ipcRenderer.send('remove-point-index', i);
+                };
+                
+                marker.appendChild(removeBtn);
+                container.appendChild(marker);
+
+                // Quando o mouse entrar na bolinha, avisamos ao Electron para NÃO ignorar o mouse
+                marker.onmouseenter = () => ipcRenderer.send('set-overlay-ignore-mouse', false);
+                // Quando o mouse sair, avisamos para voltar a ignorar o mouse (deixar passar os cliques)
+                marker.onmouseleave = () => ipcRenderer.send('set-overlay-ignore-mouse', true);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,393 @@
+/* --- SISTEMA DE TEMAS (VERSÃO FINAL CORRIGIDA) --- */
+
+/* Ajustes Globais para Temas */
+body[class*="theme-"] .app-wrapper {
+    background: transparent;
+}
+
+/* 1. Tema Aqua (Efeito Água) */
+body.theme-aqua {
+    --accent: #00f2ff;
+    --accent-glow: rgba(0, 242, 255, 0.6);
+    --accent-gradient: linear-gradient(180deg, #00f2ff 0%, #0077ff 100%);
+}
+body.theme-aqua .hud-bar {
+    background: rgba(0, 50, 100, 0.85);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+}
+
+/* 2. Tema Lava (Magma) */
+body.theme-lava {
+    --accent: #ff4e00;
+    --accent-glow: #ff4e00;
+    --accent-gradient: linear-gradient(0deg, #ff4e00, #ec9f05);
+}
+body.theme-lava .hud-bar {
+    background: rgba(30, 0, 0, 0.95);
+    border: 1px solid #ff4e00;
+    box-shadow: 0 0 20px rgba(255, 78, 0, 0.4);
+}
+
+/* 3. Tema Kawaii (Fofo Estático) */
+body.theme-kawaii {
+    --accent: #ff85a2;
+    --text-primary: #5c3d46;
+}
+body.theme-kawaii *:not(i) { font-family: 'Comic Sans MS', cursive, sans-serif !important; }
+body.theme-kawaii .hud-bar {
+    background: #fff0f5;
+    border: 4px solid #ffb3c1;
+    box-shadow: 4px 4px 0px #ff85a2;
+}
+body.theme-kawaii .logo-icon, body.theme-kawaii .mini-input i, body.theme-kawaii .hud-tool i, body.theme-kawaii .window-controls button i, body.theme-kawaii .mini-stat span, body.theme-kawaii .mini-stat small, body.theme-kawaii .brand-text, body.theme-kawaii .mini-input input {
+    color: #ff85a2 !important;
+}
+
+/* 4. Tema Cyber (SIMPLIFICADO - Linhas Neon Limpas) */
+body.theme-neon {
+    --accent: #00f7ff;
+    --text-primary: #00f7ff;
+}
+body.theme-neon .hud-bar {
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid #00f7ff;
+    box-shadow: 0 0 10px #00f7ff33;
+    border-radius: 4px;
+}
+body.theme-neon .hud-action {
+    background: transparent;
+    border: 1px solid #00f7ff;
+    color: #00f7ff !important;
+}
+body.theme-neon .hud-action i { color: #00f7ff !important; }
+
+/* 5. Tema Toy (Lego) */
+body.theme-toy {
+    --accent: #fcd12a;
+    --bg-hud: #d12229;
+    --radius: 4px;
+}
+body.theme-toy .hud-bar {
+    background: #d12229;
+    border: 4px solid #b11d23;
+    box-shadow: 0 6px 0 #8a171c;
+}
+
+/* 6. Tema Stealth (RESTAURADO - NÃO MEXER) */
+body.theme-stealth {
+    --accent: #ffffff;
+    --bg-hud: rgba(0, 0, 0, 0.2);
+}
+body.theme-stealth .hud-bar {
+    background: rgba(0, 0, 0, 0.1);
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+    box-shadow: none;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+body.theme-stealth .hud-bar:hover { opacity: 1; }
+
+/* 7. Tema Galaxy (ESPAÇO REALISTA) */
+body.theme-galaxy {
+    --accent: #9d50bb;
+    --accent-gradient: linear-gradient(to right, #6e48aa, #9d50bb);
+}
+body.theme-galaxy .hud-bar {
+    background: #000005 url('https://www.transparenttextures.com/patterns/stardust.png');
+    background-color: #020205;
+    border: 1px solid rgba(157, 80, 187, 0.4);
+    box-shadow: 0 0 25px rgba(110, 72, 170, 0.3);
+    position: relative;
+}
+body.theme-galaxy .hud-bar::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at 20% 30%, rgba(110, 72, 170, 0.2) 0%, transparent 70%),
+                radial-gradient(circle at 80% 70%, rgba(157, 80, 187, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* 8. Tema Matrix (SIMPLIFICADO - Hacker Limpo) */
+/* ============================================================
+   THEME: MATRIX ELITE (MINIMALIST & MODERN)
+   ============================================================ */
+
+body.theme-matrix {
+    --accent: #00ff41;
+    --bg-glass: rgba(0, 5, 0, 0.85); /* Vidro preto profundo */
+    --border-glow: rgba(0, 255, 65, 0.3);
+}
+
+/* Base da Hotbar - Estilo Vidro Escuro */
+body.theme-matrix .hud-bar {
+    background: var(--bg-glass) !important;
+    backdrop-filter: blur(12px); /* Efeito de vidro embaçado */
+    border: 1px solid var(--border-glow) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+    border-radius: 6px;
+}
+
+/* Tipografia - Limpa e High-Tech */
+body.theme-matrix *:not(i) {
+    font-family: 'JetBrains Mono', monospace !important;
+    color: #e0ffe0 !important; /* Branco esverdeado para não cansar a vista */
+    text-shadow: none !important;
+}
+
+/* Destaques em Verde Matrix */
+body.theme-matrix .highlight,
+body.theme-matrix .accent-text,
+body.theme-matrix i {
+    color: var(--accent) !important;
+}
+
+/* Inputs - Modernos e Sutis */
+body.theme-matrix input {
+    background: rgba(0, 255, 65, 0.05) !important;
+    border: 1px solid rgba(0, 255, 65, 0.2) !important;
+    border-radius: 4px;
+    color: var(--accent) !important;
+    padding: 2px 5px;
+}
+
+body.theme-matrix input:focus {
+    border-color: var(--accent) !important;
+    background: rgba(0, 255, 65, 0.1) !important;
+}
+
+/* Botão de Ação (Play/Stop) - O Único com Glow */
+body.theme-matrix .hud-action {
+    background: transparent !important;
+    border: 1px solid var(--accent) !important;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+    border-radius: 5px;
+}
+
+body.theme-matrix .hud-action:hover {
+    background: var(--accent) !important;
+}
+
+body.theme-matrix .hud-action:hover i {
+    color: #000 !important;
+}
+
+/* Dividores - Finos e Elegantes */
+body.theme-matrix .divider {
+    background: rgba(0, 255, 65, 0.2) !important;
+}
+
+/* Painéis de Configuração */
+body.theme-matrix .settings-panel {
+    background: rgba(0, 10, 0, 0.95) !important;
+    border: 1px solid var(--border-glow) !important;
+    backdrop-filter: blur(20px);
+}
+
+/* Esconder os Glows coloridos do fundo (pra não virar carnaval) */
+body.theme-matrix .ambient-background .glow {
+    background: var(--accent) !important;
+    opacity: 0.1 !important;
+    filter: blur(100px) !important;
+}
+
+/* Badge de Atalho */
+body.theme-matrix .badge {
+    background: rgba(0, 255, 65, 0.1) !important;
+    border: 1px solid var(--accent) !important;
+    color: var(--accent) !important;
+}
+/* 9. Tema Candy (REFEITO - Marshmallow) */
+body.theme-candy {
+    --accent: #ffb7d5;
+}
+body.theme-candy .hud-bar {
+    background: #ffffff;
+    border: 5px solid #ffb7d5;
+    border-radius: 50px;
+    box-shadow: 0 8px 0 #f0a0c0;
+}
+body.theme-candy * { color: #ff80ab !important; }
+body.theme-candy .hud-action { background: #ff80ab; border-radius: 50%; border: none; }
+body.theme-candy .hud-action i { color: #fff !important; }
+
+/* 10. Tema Retro (WINDOWS XP LUNA - ULTRA REALISTA) */
+body.theme-retro {
+    --accent: #ffffff;
+    --bg-hud: #245edb;
+    --text-primary: #ffffff;
+    --radius: 0px; /* Remove arredondamentos modernos */
+}
+
+body.theme-retro .hud-bar {
+    background: linear-gradient(to bottom, #245edb 0%, #3f8cf3 9%, #245edb 18%, #245edb 92%, #1941a5 100%);
+    border: 2px solid #003ac5;
+    border-radius: 6px 6px 0 0;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.7);
+    height: 60px;
+    animation: none !important; /* Remove qualquer animação de movimento */
+}
+
+/* Remove qualquer brilho/neon residual */
+body.theme-retro .glow, 
+body.theme-retro .hud-bar::after, 
+body.theme-retro .hud-bar::before {
+    display: none !important;
+}
+
+body.theme-retro i { 
+    display: inline-block !important; 
+    color: #ffffff !important; 
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    filter: none !important; /* Remove glows */
+}
+
+body.theme-retro .brand-text { 
+    font-family: 'Tahoma', sans-serif !important; 
+    font-weight: bold; 
+    font-style: italic;
+    color: #fff !important; 
+    text-shadow: 1px 1px 2px #003ac5;
+}
+
+body.theme-retro .hud-action { 
+    background: linear-gradient(to bottom, #42b042 0%, #329232 45%, #217221 50%, #2a8a2a 100%);
+    border: 1px solid #1a5c1a; 
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.5), 1px 1px 2px rgba(0,0,0,0.3);
+    filter: none !important;
+}
+
+body.theme-retro .mini-input, body.theme-retro .hud-tool { 
+    background: #ffffff; 
+    border: 1px solid #7f9db9; 
+    border-radius: 0;
+    box-shadow: inset 1px 1px 1px rgba(0,0,0,0.2);
+}
+
+body.theme-retro .mini-input i, body.theme-retro .hud-tool i {
+    color: #003ac5 !important;
+    text-shadow: none;
+}
+
+body.theme-retro .mini-input input { 
+    color: #000 !important; 
+    font-family: 'Tahoma', sans-serif !important;
+    background: #fff;
+}
+
+body.theme-retro .window-controls button { 
+    background: linear-gradient(to bottom, #e96b56 0%, #c9402a 100%);
+    border: 1px solid #a32d1a; 
+    border-radius: 2px;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.3);
+}
+
+/* Organização dos Menus (Sem coisas tortas) */
+body.theme-retro .settings-panel {
+    background: #ece9d8;
+    border: 3px solid #003ac5;
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    color: #000 !important;
+}
+
+body.theme-retro .settings-header {
+    background: linear-gradient(to right, #0054e3 0%, #2788f5 100%);
+    margin: -10px -10px 15px -10px;
+    padding: 5px 10px;
+    border-bottom: 1px solid #003ac5;
+    display: flex;
+    align-items: center;
+}
+
+body.theme-retro .settings-header h3 { 
+    color: #fff !important; 
+    font-family: 'Tahoma' !important; 
+    font-size: 12px;
+    margin: 0;
+}
+
+body.theme-retro .settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 5px;
+}
+
+body.theme-retro .toggle-group {
+    background: #fff;
+    border: 1px solid #7f9db9;
+    padding: 8px 10px;
+    border-radius: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #000 !important;
+}
+
+body.theme-retro label, body.theme-retro span, body.theme-retro small { 
+    color: #000 !important; 
+    font-family: 'Tahoma', sans-serif !important;
+}
+
+body.theme-retro .mini-stat span {
+    color: #fff !important;
+    text-shadow: 1px 1px 2px #000;
+}
+
+body.theme-retro .mini-stat small {
+    color: rgba(255,255,255,0.8) !important;
+}
+
+/* 11. Tema Royal (LUXO BLACK & GOLD - REFEITO) */
+body.theme-royal {
+    --accent: #d4af37; /* Gold */
+    --accent-glow: rgba(212, 175, 55, 0.4);
+    --text-primary: #ffffff;
+}
+
+body.theme-royal .hud-bar {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+    border: 1px solid #d4af37;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 0 15px rgba(212, 175, 55, 0.1);
+    border-radius: var(--radius); /* Acompanha a curva padrão da hotbar */
+}
+
+body.theme-royal .hud-action {
+    background: linear-gradient(to bottom, #f9dfa5 0%, #d4af37 100%);
+    border: none;
+    color: #000 !important;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+    font-weight: bold;
+}
+
+body.theme-royal .hud-action i { color: #000 !important; }
+
+body.theme-royal .mini-input, body.theme-royal .hud-tool {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: #d4af37 !important;
+}
+
+body.theme-royal .mini-input i, body.theme-royal .hud-tool i { color: #d4af37 !important; }
+body.theme-royal .mini-input input { color: #fff !important; }
+
+body.theme-royal .brand-text {
+    color: #d4af37 !important;
+    text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+    font-family: 'Orbitron', sans-serif !important;
+    letter-spacing: 2px;
+}
+
+body.theme-royal .settings-panel {
+    background: #0a0a0a;
+    border: 2px solid #d4af37;
+    border-radius: 0;
+}
+
+body.theme-royal .settings-header {
+    border-bottom: 1px solid #d4af37;
+    background: #111;
+}

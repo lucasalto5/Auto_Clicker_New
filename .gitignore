@@ -1,0 +1,24 @@
+# Dependências do Node.js
+node_modules/
+
+# Builds do Electron
+release-builds/
+release-builds-v2/
+release-builds-v3/
+release-builds-v4/
+release-builds-v5/
+out/
+
+# Builds do Python (PyInstaller)
+build/
+dist/
+*.spec
+__pycache__/
+
+# Logs e arquivos de sistema
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+.DS_Store
+Thumbs.db

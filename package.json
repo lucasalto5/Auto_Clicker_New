@@ -1,0 +1,22 @@
+{
+  "name": "rogerinhoxr-clicker",
+  "version": "2.0.0",
+  "description": "Elite Autoclicker with Modern Electron UI",
+  "main": "main.js",
+  "scripts": {
+    "start": ".\\node_modules\\electron\\dist\\electron.exe .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "electron-packager . autoclicker --platform=win32 --arch=x64 --out=release-builds --extra-resource=dist/backend.exe --overwrite"
+  },
+  "keywords": [
+    "autoclicker",
+    "electron",
+    "python"
+  ],
+  "author": "RogerinhoXR",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^30.5.1",
+    "electron-packager": "^17.1.2"
+  }
+}

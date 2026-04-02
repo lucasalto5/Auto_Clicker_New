@@ -1,0 +1,473 @@
+:root {
+  /* Cores Base e Gradientes (Padrão Elite) */
+  --bg-hud: rgba(10, 10, 10, 0.95);
+  --bg-panel: rgba(15, 15, 15, 0.98);
+  --accent: #ff003c;
+  --accent-glow: rgba(255, 0, 60, 0.5);
+  --accent-gradient: linear-gradient(135deg, #ff003c 0%, #a80027 100%);
+  --text-primary: #ffffff;
+  --text-secondary: #c0c0c0;
+  --text-muted: #666666;
+  --input-bg: rgba(0, 0, 0, 0.4);
+  --border: rgba(255, 255, 255, 0.1);
+  --radius: 14px;
+  --font-main: 'JetBrains Mono', monospace;
+  --font-display: 'Orbitron', sans-serif;
+}
+
+/* --- ESTILOS GERAIS (USANDO VARIÁVEIS) --- */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+  user-select: none;
+}
+
+body {
+  background: transparent !important;
+  color: var(--text-primary);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+.app-wrapper {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center;
+  padding-top: 8px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.hud-bar {
+  -webkit-app-region: drag;
+  display: flex; align-items: center;
+  height: 56px;
+  background: var(--bg-hud);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0 15px;
+  gap: 15px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+  position: relative;
+  z-index: 100; /* Aumentado para garantir que fique no topo */
+  overflow: visible !important; /* Essencial para os menus suspensos aparecerem */
+  pointer-events: auto;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hud-bar button, 
+.hud-bar input, 
+.hud-bar select,
+.settings-panel {
+  -webkit-app-region: no-drag;
+}
+
+/* Branding Section */
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-right: 5px;
+}
+
+.logo-icon {
+  font-size: 20px;
+  color: var(--accent);
+  filter: drop-shadow(0 0 8px var(--accent-glow));
+}
+
+.brand-text {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+/* Divider */
+.divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+}
+
+/* Controls Section */
+.controls-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mini-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--input-bg);
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.mini-input i {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.mini-input input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  width: 45px;
+  font-size: 13px;
+  font-family: var(--font-main);
+  outline: none;
+}
+
+.mouse-toggle {
+  display: flex;
+  background: var(--input-bg);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.mouse-toggle .icon-btn {
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: bold;
+  font-size: 11px;
+  border-radius: 6px;
+}
+
+.mouse-toggle .icon-btn.active {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* Stats Section */
+.stats-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.mini-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 50px;
+}
+
+.mini-stat span {
+  font-size: 16px;
+  font-weight: 800;
+  font-family: var(--font-display);
+  color: var(--accent);
+  text-shadow: 0 0 10px var(--accent-glow);
+}
+
+.mini-stat small {
+  font-size: 8px;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Actions Section */
+.actions-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Window Controls */
+.window-controls {
+  display: flex;
+  gap: 5px;
+  margin-left: auto;
+}
+
+.window-controls button {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+}
+
+.window-controls button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+#close-btn:hover {
+  background: #ff003c;
+}
+
+/* Botões e Ícones Globais */
+.icon-btn, .hud-tool, .hud-action, .window-controls button {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.hud-action {
+  background: var(--accent-gradient);
+  border: none; color: #fff;
+  width: 38px; height: 38px;
+  border-radius: calc(var(--radius) * 0.7);
+  box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.hud-action:hover { transform: scale(1.1) rotate(5deg); }
+#add-point-btn:hover, #stop-add-point-btn:hover { transform: none !important; }
+.hud-action.active { background: #fff; color: var(--accent); box-shadow: 0 0 20px #fff; }
+
+.hud-tool {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  width: 34px; height: 34px;
+  border-radius: calc(var(--radius) * 0.6);
+}
+
+.hud-tool:hover { background: rgba(255, 255, 255, 0.15); color: #fff; transform: translateY(-2px); }
+.hud-tool.active { color: var(--accent); border-color: var(--accent); background: rgba(255, 0, 60, 0.1); }
+
+/* Dropbox (Settings & Macro) */
+.settings-panel {
+  position: absolute;
+  top: 68px;
+  left: 50%; transform: translateX(-50%);
+  width: 700px; /* Aumentado de 620px para garantir que não corte nada horizontalmente */
+  background: var(--bg-panel);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 30px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  pointer-events: auto;
+  transform-origin: top center;
+  animation: dropDown 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  max-height: 580px; /* Aumentado um pouco mais */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar for Settings Panel */
+.settings-panel::-webkit-scrollbar {
+  width: 6px;
+}
+.settings-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+.settings-panel::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px;
+}
+
+.settings-header {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.settings-header h3 {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.settings-header h3 i {
+  color: var(--accent);
+}
+
+.settings-grid.expanded {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.settings-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toggle-group {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px 15px;
+  border-radius: calc(var(--radius) * 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  min-height: 45px;
+}
+
+.toggle-group label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* Garante que os controles à direita fiquem alinhados */
+.toggle-group input[type="checkbox"],
+.toggle-group input[type="number"],
+.toggle-group select,
+.toggle-group .badge {
+  justify-self: end;
+}
+
+.small-input {
+  width: 60px;
+  text-align: center;
+}
+
+.theme-dropdown {
+  width: 140px;
+}
+
+/* Estilo Inputs */
+.small-input, .theme-dropdown {
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  color: #fff;
+  border-radius: 6px;
+  padding: 6px;
+  outline: none;
+}
+
+.small-input:focus, .theme-dropdown:focus { border-color: var(--accent); }
+
+.badge {
+  background: var(--accent);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+/* Macro Styles */
+.settings-panel.recording {
+  border-color: #ff003c;
+  box-shadow: 0 0 20px rgba(255, 0, 60, 0.3);
+}
+
+.macro-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.record-pulse {
+  width: 10px;
+  height: 10px;
+  background: #ff003c;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ff003c;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.macro-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.macro-actions small {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.small-input:focus, .theme-dropdown:focus { border-color: var(--accent); }
+
+/* Stats e Branding */
+.brand-text .highlight { color: var(--accent); }
+
+/* Macro Container */
+.macro-container { display: flex; flex-direction: column; gap: 15px; }
+.macro-mini-log {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 12px; border-radius: 8px;
+  font-size: 11px; height: 80px;
+  border: 1px solid var(--border);
+}
+
+@keyframes dropDown {
+  from { opacity: 0; transform: translateX(-50%) translateY(-20px) scale(0.9); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+}
+
+.hidden { display: none !important; }
+
+/* Toggle Switch */
+.toggle {
+  appearance: none; width: 38px; height: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px; position: relative; cursor: pointer;
+}
+.toggle:checked { background: var(--accent); }
+.toggle::before {
+  content: ''; position: absolute; width: 14px; height: 14px;
+  background: #fff; border-radius: 50%; top: 3px; left: 3px; transition: 0.3s;
+}
+.toggle:checked::before { left: 21px; }
+
+/* Animações Ambientais Internas */
+.ambient-background {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  overflow: hidden; z-index: -1; border-radius: var(--radius);
+  pointer-events: none;
+}
+
+.glow {
+  position: absolute; border-radius: 50%; filter: blur(40px); opacity: 0.2;
+  animation: floatAmbient 8s infinite alternate ease-in-out;
+}
+
+.glow-1 {
+  width: 100px; height: 100px;
+  background: var(--accent);
+  top: -50px; left: -20px;
+}
+
+.glow-2 {
+  width: 150px; height: 150px;
+  background: var(--accent);
+  bottom: -70px; right: -30px;
+  animation-delay: -4s;
+}
+
+@keyframes floatAmbient {
+  from { transform: translate(-10%, -10%); }
+  to { transform: translate(10%, 10%); }
+}

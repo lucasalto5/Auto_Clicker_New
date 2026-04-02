@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RogerinhoXR - Elite Clicker HUD</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="themes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="theme-elite layout-hud">
+    <div class="app-wrapper">
+        <div class="hud-bar">
+            <div class="ambient-background">
+                <div class="glow glow-1"></div>
+                <div class="glow glow-2"></div>
+            </div>
+
+            <div class="brand-section" title="RogerinhoXR Elite v2.1">
+                <i class="fa-solid fa-crosshairs logo-icon"></i>
+                <span class="brand-text">ROGERINHO<span class="highlight">XR</span></span>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="controls-section">
+                <div class="mini-input" title="Intervalo (ms)">
+                    <i class="fa-solid fa-clock"></i>
+                    <input type="number" id="interval" value="100">
+                </div>
+                <div class="mini-input" title="Jitter (random)">
+                    <i class="fa-solid fa-shuffle"></i>
+                    <input type="number" id="random" value="0">
+                </div>
+                
+                <div class="mouse-toggle" id="mouse-button">
+                    <button class="icon-btn active" data-value="left" title="Botão Esquerdo">L</button>
+                    <button class="icon-btn" data-value="right" title="Botão Direito">R</button>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="stats-section">
+                <div class="mini-stat" title="Total Clicks">
+                    <span id="total-clicks">0</span>
+                    <small>CLICKS</small>
+                </div>
+                <div class="mini-stat" title="Current CPS">
+                    <span id="current-cps" class="accent-text">0.0</span>
+                    <small>CPS</small>
+                </div>
+            </div>
+
+            <div class="actions-section">
+                <button id="toggle-btn" class="hud-action">
+                    <i class="fa-solid fa-play"></i>
+                </button>
+                <button id="pin-btn" class="hud-tool active" title="Fixar no Topo">
+                    <i class="fa-solid fa-thumbtack"></i>
+                </button>
+                <button id="macro-btn" class="hud-tool" title="Macro Recorder">
+                    <i class="fa-solid fa-keyboard"></i>
+                </button>
+                <button id="settings-btn" class="hud-tool" title="Configurações">
+                    <i class="fa-solid fa-gear"></i>
+                </button>
+            </div>
+
+            <div class="window-controls">
+                <button id="min-btn" title="Minimizar"><i class="fa-solid fa-minus"></i></button>
+                <button id="close-btn" title="Fechar"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Macro Panel Dropdown -->
+            <div id="macro-panel" class="settings-panel hidden">
+                <div class="settings-header">
+                    <h3><i class="fa-solid fa-keyboard"></i> MACRO RECORDER</h3>
+                </div>
+                <div class="macro-container">
+                    <div class="macro-status">
+                        <div class="record-pulse"></div>
+                        <span id="events-count">0</span> Eventos
+                    </div>
+                    <div class="macro-actions">
+                        <button id="clear-macro" class="icon-btn" title="Limpar"><i class="fa-solid fa-trash-can"></i></button>
+                        <small>F10 para Gravar</small>
+                    </div>
+                    <div id="macro-log" class="macro-mini-log">
+                        Aguardando...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Dropdown Menu -->
+            <div id="settings-panel" class="settings-panel hidden">
+                <div class="settings-header">
+                    <h3><i class="fa-solid fa-sliders"></i> ENGINE CONFIG</h3>
+                </div>
+                <div class="settings-grid expanded">
+                    <div class="settings-column">
+                        <div class="toggle-group">
+                            <label>Sempre no Topo</label>
+                            <input type="checkbox" id="always-on-top" class="toggle" checked>
+                        </div>
+                        <div class="toggle-group">
+                            <label>Efeitos Sonoros</label>
+                            <input type="checkbox" id="sound-effects" checked class="toggle">
+                        </div>
+                        <div class="toggle-group">
+                            <label>CPS Limit (0=Max)</label>
+                            <input type="number" id="cps-limit" value="0" class="small-input">
+                        </div>
+                        <div class="toggle-group">
+                            <label>Simular Humano</label>
+                            <input type="checkbox" id="human-simulation" class="toggle">
+                        </div>
+                    </div>
+                    
+                    <div class="settings-column">
+                        <div class="toggle-group theme-select">
+                            <label>Tema da Hotbar</label>
+                            <select id="theme-selector" class="theme-dropdown">
+                                <option value="elite">Elite Glass (Padrão)</option>
+                                <option value="aqua">Aqua (Água / Bolhas)</option>
+                                <option value="lava">Lava (Fogo / Vulcão)</option>
+                                <option value="kawaii">Kawaii (Fofo / Rosa)</option>
+                                <option value="neon">Cyber Neon</option>
+                                <option value="toy">Brinquedo (Lego)</option>
+                                <option value="stealth">Stealth (Invisível)</option>
+                                <option value="galaxy">Galaxy (Espaço)</option>
+                                <option value="matrix">Matrix (Hacker)</option>
+                                <option value="candy">Candy (Doce)</option>
+                                <option value="retro">Retro (Pixel)</option>
+                                <option value="royal">Royal (Ouro)</option>
+                            </select>
+                        </div>
+                        <div class="toggle-group">
+                            <label>Repetições (0=∞)</label>
+                            <input type="number" id="limit" value="0" class="small-input">
+                        </div>
+                        <div class="toggle-group">
+                            <label>Clique: <span id="hotkey-click-label">F6</span></label>
+                            <input type="text" id="hotkey-click" value="F6" class="small-input" style="width: 40px; text-align: center;">
+                        </div>
+                        <div class="toggle-group">
+                            <label>Gravar: <span id="hotkey-record-label">F10</span></label>
+                            <input type="text" id="hotkey-record" value="F10" class="small-input" style="width: 40px; text-align: center;">
+                        </div>
+                    </div>
+
+                    <div class="settings-column">
+                        <div class="toggle-group">
+                            <label>Sistema de Alvo</label>
+                            <select id="target-mode" class="theme-dropdown">
+                                <option value="cursor">Cursor (Atual)</option>
+                                <option value="fixed">Posição Fixa</option>
+                                <option value="multi">Multi-Ponto</option>
+                            </select>
+                        </div>
+                        <div id="fixed-pos-controls" class="hidden">
+                            <div class="toggle-group">
+                                <label>X:</label>
+                                <input type="number" id="target-x" value="0" class="small-input">
+                                <label>Y:</label>
+                                <input type="number" id="target-y" value="0" class="small-input">
+                                <button id="pick-pos-btn" class="icon-btn" title="Capturar Posição"><i class="fa-solid fa-crosshairs"></i></button>
+                            </div>
+                        </div>
+                        <div id="multi-pos-controls" class="hidden">
+                            <div class="toggle-group">
+                                <button id="add-point-btn" class="hud-action" style="font-size: 10px; height: 25px; width: 100%;">
+                                    <i class="fa-solid fa-plus"></i> Add Ponto
+                                </button>
+                                <button id="stop-add-point-btn" class="hud-action hidden" style="font-size: 10px; height: 25px; width: 100%; background: #ff4444;">
+                                    <i class="fa-solid fa-stop"></i> Parar
+                                </button>
+                                <button id="clear-points-btn" class="icon-btn" title="Limpar Pontos"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                            <div id="points-list" style="max-height: 80px; overflow-y: auto; font-size: 10px; color: white;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-column">
+                        <div class="toggle-group">
+                            <label>Presets</label>
+                            <select id="preset-selector" class="theme-dropdown">
+                                <option value="">Selecione...</option>
+                            </select>
+                        </div>
+                        <div class="toggle-group">
+                            <input type="text" id="preset-name" placeholder="Nome do Preset" class="small-input" style="width: 100%;">
+                        </div>
+                        <div class="toggle-group" style="gap: 5px;">
+                            <button id="save-preset-btn" class="hud-action" style="font-size: 10px; height: 25px; flex: 1;">Salvar</button>
+                            <button id="delete-preset-btn" class="icon-btn" title="Excluir"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="renderer.js"></script>
+</body>
+</html>
