@@ -1,6 +1,5 @@
 <h1 align="center">
   <br>
-  <img src="icon.ico" alt="Auto Clicker Logo" width="120">
   <br>
   Elite Auto Clicker & Macro
   <br>
